@@ -4,10 +4,14 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+
 public class TcpSender extends Thread{
 	
 	private static InetAddress host;
 	private static final int port = 1241;
+	
+	
+	
 	
 
 	public static void main(String[] args) {
@@ -30,6 +34,9 @@ public class TcpSender extends Thread{
 	
 	private static void accessServer() {
 		Socket link = null;
+		
+		
+		
 		
 		try {
 			//socketimize host ve port numarasýný verdik buna göre iþlem yapacak.
@@ -101,8 +108,10 @@ public class TcpSender extends Thread{
 				System.out.println("Tüm paketler gönderilirken geçen süre : " +
 				(endTime - startTime) + "nano saniye");
 				
-				output.println("CLOSE");
+				
 			}
+			
+			output.println("CLOSE");
 			
 		} catch (IOException i) {
 			i.printStackTrace();

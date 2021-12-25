@@ -4,14 +4,21 @@ import java.io.*;
 import java.net.*;  
 import java.util.*; 
 
-public class TcpRouter {
+public class TcpRouter extends Thread{
 	
+	
+
+
 	private static ServerSocket serverSocket;
-	private static InetAddress host;
+	public static InetAddress host;
 	private static final int port = 1241;
 	private static final int port2 = 1240;
 	
 	private static Socket link2 = null;
+	
+	
+	
+
 
 	public static void main(String[] args) {
 		
