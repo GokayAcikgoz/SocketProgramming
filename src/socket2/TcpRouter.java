@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;  
 import java.util.*; 
 
-public class TcpRouter extends Thread{
+public class TcpRouter extends Root{
 	
 	
 
@@ -15,6 +15,8 @@ public class TcpRouter extends Thread{
 	private static final int port2 = 1240;
 	
 	private static Socket link2 = null;
+	
+	private int sendPorts[];
 	
 	
 	

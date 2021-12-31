@@ -10,9 +10,7 @@ public class TcpSender extends Thread{
 	private static InetAddress host;
 	private static final int port = 1241;
 	
-	
-	
-	
+
 
 	public static void main(String[] args) {
 		
