@@ -29,7 +29,7 @@ public class Receiver extends Root{
                 Thread th = new ClientHandler(link,input,output);
                 th.start();
             } catch (IOException ex) {
-                ex.printStackTrace();
+            	System.err.println("Root.Router.startSenderService()");
             }
         }
        
@@ -74,13 +74,27 @@ public class Receiver extends Root{
             int numMessages = 0;
             String message;
             do {   
-                message = dis.nextLine();
-                dos.println("ACK"+ message.substring(message.length() - 1));
+                message =getMessage();
+                sendMessage("ACK"+ message.substring(message.length() - 1));
                 numMessages++;
                 System.out.println(" - " +message);
             } while (!message.equals("***CLOSE***"));
 
         }
+        
+        private String getMessage() {
+        	while(true) {
+        		if (dis.hasNext()) {
+        			return dis.nextLine();
+        		}
+        	}
+        }
+        
+        
+        private void sendMessage(String message) {
+        	dos.println(message);
+        }
+        
 
     }
     

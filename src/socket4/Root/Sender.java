@@ -17,17 +17,7 @@ public class Sender extends Thread {
     //MSenderi cagirdigimiz zaman bizden Port numarasý ister.
     public Sender(int PORT) {
         this.PORT = PORT;
-        try {
-            
-            host = InetAddress.getLocalHost();
-            link = new Socket(host, PORT);
-            input = new Scanner(link.getInputStream());
-            output = new PrintWriter(link.getOutputStream(), true);
-            System.out.println("Sender Çalýþtý");
-        } catch (Exception uhEx) {
-        	System.out.println("Sender çalýþýrken hata meydana geldi");
-            System.exit(1);
-        }
+        this.serviceStart(PORT);
     }
     
 
@@ -82,12 +72,12 @@ public class Sender extends Thread {
         do {
 
             message = "PCK";
-            output.println(message + counter);
+            this.sendMessage(message + counter);
             attempt++;
             
             
 
-            String request = input.nextLine();
+            String request = this.getRequest();
             
             String[] split = request.split(",");
             
@@ -97,7 +87,7 @@ public class Sender extends Thread {
                 System.out.println(message + counter + " Resending...");
                 output.println(message + counter);
                 attempt++;
-                split = input.nextLine().split(",");
+                split = this.getRequest().split(",");
                 if(split != null){
                     str2 = split[split.length-1].substring(0, 3);
                     System.out.println(str2);
@@ -115,6 +105,30 @@ public class Sender extends Thread {
 
         System.out.println("Paketler gidene kadar gecen süre : " +(endTime - startTime) + " nano seconds.");
         
+    }
+    
+    public void sendMessage(String message) {
+    	output.println(message);
+    }
+    
+    public String getRequest() {
+    	if (input.hasNext()) {
+			return input.nextLine();
+		}else {
+			return "null";
+		}
+    }
+    
+    
+    public void serviceStart(int PORT) {
+    	try {
+			host = InetAddress.getLocalHost();
+			link = new Socket(host, PORT);
+			input = new Scanner(link.getInputStream());
+			output = new PrintWriter(link.getOutputStream(), true);
+		} catch (Exception e) {
+			System.exit(1);
+		}
     }
     
     
