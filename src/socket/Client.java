@@ -14,12 +14,12 @@ public class Client {
 		try {
 			socket = new Socket(address, port);
 			
-			System.out.println("Bağlandı");
+			System.out.println("BaÃ°landÃ½");
 			
-			//clientten bilgiyi aldık
+			//clientten bilgiyi aldÃ½k
 			dataInputStream = new DataInputStream(System.in);
 			
-			//servera gönderdik
+			//servera gÃ¶nderdik
 			dataOutputStream = new DataOutputStream(socket.getOutputStream());
 			
 		} catch (UnknownHostException u) {
@@ -30,6 +30,7 @@ public class Client {
 		}
 		
 		String line = "";
+		//there will start
 		
 		while(!line.equals("over")) {
 			try {
